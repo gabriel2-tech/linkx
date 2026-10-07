@@ -8,7 +8,7 @@ import FormError from '@/components/ui/FormError'
 import styles from './AuthPages.module.css'
 
 function BrandMark() {
-  return <div className={styles.brand}>link</div>
+  return <div className={styles.brand}>LinkX</div>
 }
 
 function VisualPanel() {
@@ -86,7 +86,7 @@ export default function Login() {
       <section className={styles.formPanel}>
         <div className={styles.formBox}>
           <div className={styles.mobileBrand}><BrandMark /></div>
-          <h1>Se connecter à link</h1>
+          <h1>Se connecter à LinkX</h1>
           <p className={styles.intro}>Retrouvez votre espace et partagez vos instants.</p>
           <form onSubmit={submit} noValidate>
             <Input label="Adresse e-mail" name="email" type="email" autoComplete="email" value={form.email} onChange={change} required />
@@ -97,7 +97,7 @@ export default function Login() {
           <Link className={styles.link} to="/forgot-password">Mot de passe oublié ?</Link>
           <Link className={styles.secondary} to="/signup">Créer un nouveau compte</Link>
         </div>
-        <footer className={styles.footer}>© {new Date().getFullYear()} link</footer>
+        <footer className={styles.footer}>© {new Date().getFullYear()} LinkX</footer>
       </section>
     </main>
   )

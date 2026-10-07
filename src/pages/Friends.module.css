@@ -1,0 +1,198 @@
+.page {
+  min-height: 100svh;
+  background: #f0f2f5;
+  padding: 24px 16px 48px;
+  color: #17202a;
+}
+
+.header,
+.card,
+.profileLink {
+  width: min(900px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.backButton {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border: 0;
+  border-radius: 50%;
+  background: #fff;
+  color: #17202a;
+  box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.eyebrow {
+  margin: 0 0 2px;
+  color: #1877f2;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.header p:last-child {
+  margin: 3px 0 0;
+  color: #65676b;
+  font-size: 13px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #dfe3e8;
+  border-radius: 12px;
+  padding: 18px;
+}
+
+.cardTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #e4e6e9;
+}
+
+.cardTitle h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.cardTitle span {
+  min-width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #e7f0ff;
+  color: #1877f2;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding-top: 14px;
+}
+
+.friend {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid #e4e6e9;
+  border-radius: 10px;
+}
+
+.avatar {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #dbeafe, #93c5fd);
+  color: #1555a8;
+  font-size: 17px;
+  font-weight: 850;
+}
+
+.friendInfo {
+  min-width: 0;
+}
+
+.friendInfo strong,
+.friendInfo span {
+  display: block;
+}
+
+.friendInfo strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.friendInfo span {
+  margin-top: 4px;
+  color: #65676b;
+  font-size: 12px;
+}
+
+.messageButton {
+  min-height: 36px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 12px;
+  background: #e7f0ff;
+  color: #1877f2;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.profileLink {
+  display: block;
+  margin-top: 14px;
+  color: #1877f2;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+@media (max-width: 620px) {
+  .page {
+    padding: 10px 0 28px;
+  }
+
+  .header {
+    padding: 8px 12px 4px;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .card {
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    padding: 14px 12px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .friend {
+    grid-template-columns: 52px minmax(0, 1fr) auto;
+  }
+
+  .avatar {
+    width: 52px;
+    height: 52px;
+  }
+
+  .messageButton {
+    min-height: 34px;
+  }
+
+  .profileLink {
+    padding: 0 12px;
+  }
+}

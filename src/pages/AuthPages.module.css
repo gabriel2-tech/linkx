@@ -177,3 +177,23 @@
   .row { grid-template-columns: 1fr; }
   .centerBrand { margin-bottom: 18px; }
 }
+
+
+.resetBox {
+  width: min(100%, 460px);
+  align-self: center;
+  padding: 20px 0;
+}
+.resetBox h1 {
+  margin: 0 0 24px;
+  color: #1c1e21;
+  font-size: 28px;
+  line-height: 1.18;
+  letter-spacing: -.5px;
+}
+.resetBox form { display: grid; gap: 16px; }
+.resetBox .errorText { margin: 0 0 18px; color: #b42318; line-height: 1.45; }
+@media (max-width: 560px) {
+  .resetBox { width: min(100%, 460px); padding: 12px 0 24px; }
+  .resetBox h1 { font-size: 25px; }
+}

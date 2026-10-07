@@ -22,7 +22,7 @@ const friends = [
 ]
 
 const publications = [
-  { type: 'text', text: 'Bienvenue sur link. Partagez vos moments, vos idées et ce qui compte pour vous.' },
+  { type: 'text', text: 'Bienvenue sur LinkX. Partagez vos moments, vos idées et ce qui compte pour vous.' },
   { type: 'photo', text: 'Un moment à partager.' },
   { type: 'video', text: 'Une petite vidéo à regarder.' },
 ]
@@ -235,7 +235,7 @@ export default function Profile() {
 
           <section className={styles.card}>
             <h2>À propos</h2>
-            <p className={styles.aboutLine}>Membre de link</p>
+            <p className={styles.aboutLine}>Membre de LinkX</p>
             {profile?.gender && <p className={styles.aboutLine}>{profile.gender}</p>}
           </section>
         </aside>

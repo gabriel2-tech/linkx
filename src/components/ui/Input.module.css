@@ -1,0 +1,5 @@
+.field { display: grid; gap: 7px; }
+.field label { font-weight: 650; font-size: 14px; }
+.field input { width: 100%; min-height: 50px; border: 1px solid var(--border); border-radius: var(--radius); padding: 0 14px; background: #fff; color: var(--text); }
+.field input[aria-invalid="true"] { border-color: var(--danger); }
+.error { margin: 0; color: var(--danger); font-size: 13px; line-height: 1.35; }

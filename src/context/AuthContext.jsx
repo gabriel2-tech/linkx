@@ -9,7 +9,10 @@ export function AuthProvider({ children }) {
   const [session, setSession] = useState(null)
   const [profile, setProfile] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [recoverySession, setRecoverySession] = useState(false)
+  const [recoverySession, setRecoverySession] = useState(() => {
+    const params = new URLSearchParams(window.location.search)
+    return params.get('type') === 'recovery' || window.location.hash.includes('type=recovery')
+  })
 
   const refreshProfile = useCallback(async () => {
     const id = session?.user?.id

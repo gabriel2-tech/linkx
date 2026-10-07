@@ -34,6 +34,10 @@ class AppErrorBoundary extends Component {
   }
 }
 
+function StartupError({ error }) {
+  return <div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', padding: 24, fontFamily: 'system-ui, sans-serif', background: '#f5f7fa' }}><div style={{ width: 'min(100%, 560px)', background: '#fff', border: '1px solid #d9dee7', borderRadius: 14, padding: 28 }}><div style={{ color: '#1877f2', fontSize: 38, fontWeight: 800 }}>link</div><h1>Erreur au démarrage</h1><p>Le navigateur a rencontré cette erreur :</p><pre style={{ whiteSpace: 'pre-wrap', overflowWrap: 'anywhere', color: '#8b1e1e' }}>{error?.stack || error?.message || String(error)}</pre></div></div>
+}
+
 const root = createRoot(document.getElementById('root'))
 
 import('./App.jsx')

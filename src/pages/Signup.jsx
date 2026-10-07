@@ -65,9 +65,9 @@ export default function Signup() {
     <main className={styles.simplePage}>
       <section className={styles.signupBox}>
         <Link className={styles.back} to="/login" aria-label="Retour à la connexion">‹</Link>
-        <div className={styles.centerBrand}>link</div>
+        <div className={styles.centerBrand}>LinkX</div>
         <h1>Créer un compte</h1>
-        <p className={styles.intro}>Quelques informations suffisent pour commencer sur link.</p>
+        <p className={styles.intro}>Quelques informations suffisent pour commencer sur LinkX.</p>
 
         <form className={styles.authForm} onSubmit={submit} noValidate>
           <div className={styles.row}>

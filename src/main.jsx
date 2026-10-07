@@ -1,7 +1,6 @@
 import { StrictMode, Component } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles/global.css'
-import App from './App.jsx'
 
 class AppErrorBoundary extends Component {
   constructor(props) {
@@ -35,10 +34,23 @@ class AppErrorBoundary extends Component {
   }
 }
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <AppErrorBoundary>
-      <App />
-    </AppErrorBoundary>
-  </StrictMode>,
-)
+const root = createRoot(document.getElementById('root'))
+
+import('./App.jsx')
+  .then(({ default: App }) => {
+    root.render(
+      <StrictMode>
+        <AppErrorBoundary>
+          <App />
+        </AppErrorBoundary>
+      </StrictMode>,
+    )
+  })
+  .catch((error) => {
+    console.error('link startup error:', error)
+    root.render(
+      <AppErrorBoundary error={error}>
+        <div />
+      </AppErrorBoundary>,
+    )
+  })

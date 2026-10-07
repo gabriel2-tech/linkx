@@ -9,7 +9,6 @@ import Input from '@/components/ui/Input'
 import PasswordInput from '@/components/ui/PasswordInput'
 import Select from '@/components/ui/Select'
 import BirthDateSelect from '@/components/auth/BirthDateSelect'
-import Card from '@/components/ui/Card'
 import FormError from '@/components/ui/FormError'
 import styles from './AuthPages.module.css'
 
@@ -63,30 +62,49 @@ export default function Signup() {
   }
 
   return (
-    <div className={styles.page}>
-      <Card wide>
-        <div className={styles.brand}>link</div>
-        <h1>Créer un compte link</h1>
-        <p className={styles.intro}>Quelques informations suffisent pour commencer.</p>
-        <form onSubmit={submit} noValidate>
+    <main className={styles.simplePage}>
+      <section className={styles.signupBox}>
+        <Link className={styles.back} to="/login" aria-label="Retour à la connexion">‹</Link>
+        <div className={styles.centerBrand}>link</div>
+        <h1>Créer un compte</h1>
+        <p className={styles.intro}>Quelques informations suffisent pour commencer sur link.</p>
+
+        <form className={styles.authForm} onSubmit={submit} noValidate>
           <div className={styles.row}>
             <Input label="Prénom" name="first_name" autoComplete="given-name" value={form.first_name} onChange={change} error={errors.first_name} />
             <Input label="Nom" name="last_name" autoComplete="family-name" value={form.last_name} onChange={change} error={errors.last_name} />
           </div>
+
           <BirthDateSelect value={form.birth_date} onChange={setBirthDate} error={errors.birth_date} />
+
           <Select label="Genre" name="gender" value={form.gender} onChange={change} error={errors.gender} options={[
             { value: 'femme', label: 'Femme' },
             { value: 'homme', label: 'Homme' },
             { value: 'personnalise', label: 'Personnalisé' },
           ]} placeholder="Sélectionnez votre genre" />
-          <Input label="Adresse e-mail" name="email" type="email" autoComplete="email" value={form.email} onChange={change} error={errors.email} />
+
+          <div>
+            <Input label="Adresse e-mail" name="email" type="email" autoComplete="email" value={form.email} onChange={change} error={errors.email} />
+            <p className={styles.helper}>Vous pouvez utiliser cette adresse pour vous connecter à votre compte.</p>
+          </div>
+
           <PasswordInput label="Mot de passe" name="password" autoComplete="new-password" value={form.password} onChange={change} error={errors.password} />
+
+          <p className={styles.legal}>
+            En appuyant sur <strong>Créer un compte</strong>, vous acceptez nos conditions d’utilisation et notre politique de confidentialité.
+          </p>
+
           <FormError message={serverError} />
           {success && <p className={styles.success} role="status">{success}</p>}
-          <Button type="submit" loading={pending}>Envoyer</Button>
+          <Button type="submit" loading={pending}>Créer un compte</Button>
         </form>
-        <Link className={styles.secondary} to="/login">J’ai déjà un compte</Link>
-      </Card>
-    </div>
+
+        <Link className={styles.accountButton} to="/login">J’ai déjà un compte</Link>
+      </section>
+
+      <footer className={styles.siteFooter}>
+        <span>Français (France)</span><span>English (US)</span><span>À propos</span><span>Confidentialité</span><span>Conditions générales</span>
+      </footer>
+    </main>
   )
 }

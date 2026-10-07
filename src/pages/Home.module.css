@@ -1,0 +1,5 @@
+.page { max-width: 900px; margin: 0 auto; padding: 48px 20px; }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 36px; box-shadow: var(--shadow); }
+.card h1 { margin: 6px 0 10px; font-size: 34px; }
+.card p { color: var(--muted); line-height: 1.6; }
+.eyebrow { color: var(--blue) !important; font-weight: 700; margin: 0; }

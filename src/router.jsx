@@ -10,6 +10,7 @@ import ForgotPassword from '@/pages/ForgotPassword'
 import ResetPassword from '@/pages/ResetPassword'
 import Home from '@/pages/Home'
 import Profile from '@/pages/Profile'
+import Friends from '@/pages/Friends'
 import NotFound from '@/pages/NotFound'
 import ErrorPage from '@/pages/ErrorPage'
 
@@ -53,6 +54,7 @@ export const router = createBrowserRouter([
             children: [
               { index: true, element: <Home /> },
               { path: 'profile', element: <Profile /> },
+              { path: 'friends', element: <Friends /> },
             ],
           },
         ],

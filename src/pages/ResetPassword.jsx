@@ -5,7 +5,6 @@ import { updatePassword } from '@/services/authService'
 import { validatePassword } from '@/utils/validators'
 import Button from '@/components/ui/Button'
 import PasswordInput from '@/components/ui/PasswordInput'
-import Card from '@/components/ui/Card'
 import FormError from '@/components/ui/FormError'
 import styles from './AuthPages.module.css'
 
@@ -37,9 +36,9 @@ export default function ResetPassword() {
   if (loading) return <div className="route-loading"><span className="spinner" aria-label="Chargement" /></div>
 
   return (
-    <div className={styles.page}>
-      <Card>
-        <div className={styles.brand}>link</div>
+    <div className={styles.simplePage}>
+      <main className={styles.resetBox}>
+        <div className={styles.centerBrand}>link</div>
         <h1>Nouveau mot de passe</h1>
         {!recoverySession ? (
           <>
@@ -54,7 +53,7 @@ export default function ResetPassword() {
             <Button type="submit" loading={pending}>Enregistrer</Button>
           </form>
         )}
-      </Card>
+      </main>
     </div>
   )
 }

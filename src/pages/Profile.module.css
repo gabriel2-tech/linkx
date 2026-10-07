@@ -18,7 +18,7 @@
   height: 250px;
   position: relative;
   overflow: hidden;
-  background: url('/cover-reference.jpg') center 43% / cover no-repeat;
+  background:\n    radial-gradient(circle at 22% 35%, rgba(238,154,82,.38), transparent 24%),\n    radial-gradient(circle at 78% 20%, rgba(255,215,150,.24), transparent 25%),\n    linear-gradient(120deg, #211b19 0%, #4d3427 38%, #9a6439 72%, #c18c50 100%);
 }
 
 .coverPattern {

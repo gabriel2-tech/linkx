@@ -84,7 +84,7 @@ export function AuthProvider({ children }) {
 
     loadProfile()
     return () => { active = false }
-  }, [id])
+  }, [session?.user?.id])
 
   const signOut = useCallback(async () => {
     const result = await signOutService()

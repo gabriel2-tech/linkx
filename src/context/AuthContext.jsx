@@ -9,6 +9,7 @@ export function AuthProvider({ children }) {
   const [session, setSession] = useState(null)
   const [profile, setProfile] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [recoverySession, setRecoverySession] = useState(false)
 
   const refreshProfile = useCallback(async () => {
     const id = session?.user?.id
@@ -23,9 +24,7 @@ export function AuthProvider({ children }) {
         setProfile(data)
         return
       }
-      if (attempt < 2 && error) {
-        await new Promise((resolve) => setTimeout(resolve, 500))
-      }
+      if (attempt < 2 && error) await new Promise((resolve) => setTimeout(resolve, 500))
     }
     setProfile(null)
   }, [session?.user?.id])
@@ -37,37 +36,43 @@ export function AuthProvider({ children }) {
       if (active) setSession(data.session)
     })
 
-    const { data: subscription } = supabase.auth.onAuthStateChange((_event, nextSession) => {
-      if (active) setSession(nextSession)
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, nextSession) => {
+      if (!active) return
+      setSession(nextSession)
+      if (event === 'PASSWORD_RECOVERY') setRecoverySession(true)
+      if (event === 'SIGNED_OUT') setRecoverySession(false)
     })
 
     return () => {
       active = false
-      subscription.subscription.unsubscribe()
+      authListener.subscription.unsubscribe()
     }
   }, [])
 
   useEffect(() => {
     let active = true
+    const id = session?.user?.id
 
     async function loadProfile() {
-      if (!session?.user?.id) {
+      if (!id) {
         setProfile(null)
-        if (active) setLoading(false)
+        setLoading(false)
         return
       }
 
       setLoading(true)
-      const id = session.user.id
       for (let attempt = 0; attempt < 3; attempt += 1) {
         const { data } = await getProfile(id)
         if (data) {
-          if (active && session?.user?.id === id) setProfile(data)
-          if (active) setLoading(false)
+          if (active) {
+            setProfile(data)
+            setLoading(false)
+          }
           return
         }
         if (attempt < 2) await new Promise((resolve) => setTimeout(resolve, 500))
       }
+
       if (active) {
         setProfile(null)
         setLoading(false)
@@ -76,19 +81,14 @@ export function AuthProvider({ children }) {
 
     loadProfile()
     return () => { active = false }
-  }, [session?.user?.id])
-
-  useEffect(() => {
-    supabase.auth.getSession().then(() => {
-      setLoading((current) => current)
-    })
-  }, [])
+  }, [id])
 
   const signOut = useCallback(async () => {
     const result = await signOutService()
     if (!result.error) {
       setSession(null)
       setProfile(null)
+      setRecoverySession(false)
     }
     return result
   }, [])
@@ -96,7 +96,7 @@ export function AuthProvider({ children }) {
   const user = session?.user ?? null
 
   return (
-    <AuthContext.Provider value={{ session, user, profile, loading, refreshProfile, signOut }}>
+    <AuthContext.Provider value={{ session, user, profile, loading, recoverySession, refreshProfile, signOut }}>
       {children}
     </AuthContext.Provider>
   )

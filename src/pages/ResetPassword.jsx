@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/context/AuthContext'
 import { updatePassword } from '@/services/authService'
@@ -10,39 +10,27 @@ import FormError from '@/components/ui/FormError'
 import styles from './AuthPages.module.css'
 
 export default function ResetPassword() {
-  const { session, loading } = useAuth()
+  const { recoverySession, loading } = useAuth()
   const navigate = useNavigate()
   const [password, setPassword] = useState('')
   const [confirmation, setConfirmation] = useState('')
   const [error, setError] = useState('')
   const [pending, setPending] = useState(false)
-  const [recovery, setRecovery] = useState(false)
-
-  useEffect(() => {
-    if (loading) return undefined
-    if (session) setRecovery(true)
-
-    let active = true
-    const { data: subscription } = window.__supabaseAuthSubscription ?? { data: { subscription: null } }
-    void subscription
-    return () => { active = false }
-  }, [loading, session])
-
-  useEffect(() => {
-    let active = true
-    return () => { active = false }
-  }, [])
 
   async function submit(event) {
     event.preventDefault()
     const validation = validatePassword(password)
     if (validation) { setError(validation); return }
     if (password !== confirmation) { setError('Les mots de passe ne correspondent pas.'); return }
+
     setError('')
     setPending(true)
     const { error: updateError } = await updatePassword(password)
     setPending(false)
-    if (updateError) { setError('Impossible de modifier le mot de passe. Le lien est peut-être expiré.'); return }
+    if (updateError) {
+      setError('Impossible de modifier le mot de passe. Le lien est peut-être expiré.')
+      return
+    }
     navigate('/', { replace: true })
   }
 
@@ -53,7 +41,7 @@ export default function ResetPassword() {
       <Card>
         <div className={styles.brand}>link</div>
         <h1>Nouveau mot de passe</h1>
-        {!recovery ? (
+        {!recoverySession ? (
           <>
             <p className={styles.errorText}>Ce lien est invalide ou a expiré.</p>
             <Link className={styles.secondary} to="/forgot-password">Demander un nouveau lien</Link>

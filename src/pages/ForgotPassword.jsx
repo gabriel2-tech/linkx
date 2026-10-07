@@ -30,7 +30,7 @@ export default function ForgotPassword() {
     <main className={styles.simplePage}>
       <section className={styles.forgotBox}>
         <Link className={styles.back} to="/login" aria-label="Retour à la connexion">‹</Link>
-        <div className={styles.centerBrand}>link</div>
+        <div className={styles.centerBrand}>LinkX</div>
         <h1>Mot de passe oublié ?</h1>
         <p className={styles.intro}>
           Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.

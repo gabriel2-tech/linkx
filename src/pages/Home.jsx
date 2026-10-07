@@ -13,13 +13,13 @@ const stories = [
 
 const posts = [
   {
-    name: 'Link communauté',
+    name: 'LinkX communauté',
     meta: 'Il y a 1 h · Public',
-    text: 'Bienvenue sur link. Partagez vos moments, vos idées et vos découvertes.',
+    text: 'Bienvenue sur LinkX. Partagez vos moments, vos idées et vos découvertes.',
     visual: 'community',
   },
   {
-    name: 'Créateurs link',
+    name: 'Créateurs LinkX',
     meta: 'Il y a 3 h · Public',
     text: 'Un instant, une histoire. Qu’est-ce que vous créez aujourd’hui ?',
     visual: 'creator',
@@ -46,10 +46,10 @@ function Header({ profile }) {
     <header className={styles.topbar}>
       <div className={styles.topbarInner}>
         <div className={styles.headerLeft}>
-          <a className={styles.logo} href="/" aria-label="link">link</a>
+          <a className={styles.logo} href="/" aria-label="LinkX">LinkX</a>
           <label className={styles.search}>
             <span aria-hidden="true">⌕</span>
-            <input placeholder="Rechercher sur link" aria-label="Rechercher" />
+            <input placeholder="Rechercher sur LinkX" aria-label="Rechercher" />
           </label>
         </div>
 
@@ -95,7 +95,7 @@ function LeftSidebar({ profile }) {
 
       <div className={styles.shortcuts}>
         <p>Vos raccourcis</p>
-        <a href="#creators"><span className={styles.shortcutDot} /> Créateurs link</a>
+        <a href="#creators"><span className={styles.shortcutDot} /> Créateurs LinkX</a>
         <a href="#topics"><span className={styles.shortcutDot} /> Tendances</a>
         <a href="#friends"><span className={styles.shortcutDot} /> Mes contacts</a>
       </div>
@@ -123,9 +123,9 @@ function RightSidebar() {
       <section className={styles.sponsored}>
         <h2>Suggestions</h2>
         <div className={styles.sponsorCard}>
-          <div className={styles.sponsorVisual}>link</div>
+          <div className={styles.sponsorVisual}>LinkX</div>
           <strong>Partagez l'instant.</strong>
-          <small>Découvrez les nouveautés de link</small>
+          <small>Découvrez les nouveautés de LinkX</small>
         </div>
       </section>
 
@@ -133,7 +133,7 @@ function RightSidebar() {
         <div className={styles.sectionHeading}><h2>Demandes de contact</h2><button type="button">Voir tout</button></div>
         <div className={styles.request}>
           <span className={[styles.avatar, styles.avatarGold].join(' ')}>AM</span>
-          <div><strong>Amis link</strong><small>24 contacts en commun</small></div>
+          <div><strong>Amis LinkX</strong><small>24 contacts en commun</small></div>
           <button type="button">Confirmer</button>
         </div>
       </section>
@@ -199,7 +199,7 @@ function Post({ post }) {
       </header>
       <p className={styles.postText}>{post.text}</p>
       <div className={[styles.postVisual, styles[post.visual]].join(' ')}>
-        <div className={styles.visualLabel}>link</div>
+        <div className={styles.visualLabel}>LinkX</div>
         <strong>{post.visual === 'community' ? 'Partagez l’instant.' : 'Votre histoire commence ici.'}</strong>
       </div>
       <footer className={styles.postFooter}><span>💬 24 commentaires</span><span>↗ 8 partages</span></footer>

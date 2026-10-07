@@ -38,7 +38,7 @@ export default function ResetPassword() {
   return (
     <div className={styles.simplePage}>
       <main className={styles.resetBox}>
-        <div className={styles.centerBrand}>link</div>
+        <div className={styles.centerBrand}>LinkX</div>
         <h1>Nouveau mot de passe</h1>
         {!recoverySession ? (
           <>

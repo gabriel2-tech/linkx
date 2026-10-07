@@ -1,0 +1,14 @@
+:root {
+  --blue: #1877f2;
+  --blue-dark: #0f66d8;
+  --bg: #f5f7fa;
+  --card: #fff;
+  --text: #17202a;
+  --muted: #667085;
+  --border: #d9dee7;
+  --danger: #c62828;
+  --success: #16794b;
+  --radius: 10px;
+  --shadow: 0 8px 28px rgba(16, 24, 40, .08);
+  --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}

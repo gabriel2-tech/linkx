@@ -1,0 +1,4 @@
+.uploader { display: grid; gap: 6px; margin: 8px 0 22px; }
+.uploader label { font-weight: 650; font-size: 14px; }
+.uploader input { width: 100%; }
+.uploader small { color: var(--muted); }

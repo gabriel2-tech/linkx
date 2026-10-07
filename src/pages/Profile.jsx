@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useAuth } from '@/context/AuthContext'
 import { updateProfile, uploadAvatar } from '@/services/profileService'
 import { validateProfile } from '@/utils/validators'
@@ -21,18 +22,9 @@ const friends = [
 ]
 
 const publications = [
-  {
-    type: 'text',
-    text: 'Bienvenue sur link. Partagez vos moments, vos idées et ce qui compte pour vous.',
-  },
-  {
-    type: 'photo',
-    text: 'Un moment à partager.',
-  },
-  {
-    type: 'video',
-    text: 'Une petite vidéo à regarder.',
-  },
+  { type: 'text', text: 'Bienvenue sur link. Partagez vos moments, vos idées et ce qui compte pour vous.' },
+  { type: 'photo', text: 'Un moment à partager.' },
+  { type: 'video', text: 'Une petite vidéo à regarder.' },
 ]
 
 function InitialAvatar({ name, initials, imageUrl = '' }) {
@@ -54,12 +46,7 @@ function Publication({ publication, profile }) {
   return (
     <article className={styles.publication}>
       <header className={styles.publicationHeader}>
-        <Avatar
-          src={profile?.avatar_url}
-          firstName={profile?.first_name}
-          lastName={profile?.last_name}
-          size="small"
-        />
+        <Avatar src={profile?.avatar_url} firstName={profile?.first_name} lastName={profile?.last_name} size="small" />
         <div>
           <strong>{name}</strong>
           <span>Il y a quelque temps · Amis</span>
@@ -99,10 +86,10 @@ export default function Profile() {
   const [pending, setPending] = useState(false)
   const [editing, setEditing] = useState(false)
   const [activeTab, setActiveTab] = useState('publications')
+  const [moreOpen, setMoreOpen] = useState(false)
 
   useEffect(() => {
     if (!profile) return
-
     setForm({
       first_name: profile.first_name || '',
       last_name: profile.last_name || '',
@@ -186,36 +173,42 @@ export default function Profile() {
             <p className={styles.bio}>{bio}</p>
           </div>
 
-          <button
-            type="button"
-            className={styles.editProfileButton}
-            onClick={() => setEditing((value) => !value)}
-          >
-            {editing ? 'Fermer' : 'Modifier le profil'}
-          </button>
+          <div className={styles.profileActions}>
+            <button type="button" className={styles.editProfileButton} onClick={() => setEditing((value) => !value)}>
+              {editing ? 'Fermer' : 'Modifier le profil'}
+            </button>
+            <button
+              type="button"
+              className={styles.moreProfileButton}
+              aria-label="Plus d'options du profil"
+              aria-expanded={moreOpen}
+              onClick={() => setMoreOpen((value) => !value)}
+            >
+              ⋯
+            </button>
+            {moreOpen && (
+              <div className={styles.moreMenu}>
+                <Link to="/friends" onClick={() => setMoreOpen(false)}>
+                  <span>👥</span>
+                  <span><strong>Amis</strong><small>Voir tous mes amis</small></span>
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
 
         <nav className={styles.profileTabs} aria-label="Navigation du profil">
-          <button
-            type="button"
-            className={activeTab === 'publications' ? styles.activeTab : ''}
-            onClick={() => setActiveTab('publications')}
-          >
+          <button type="button" className={activeTab === 'publications' ? styles.activeTab : ''} onClick={() => setActiveTab('publications')}>
             Publications
           </button>
-          <button
-            type="button"
-            className={activeTab === 'photos' ? styles.activeTab : ''}
-            onClick={() => setActiveTab('photos')}
-          >
+          <button type="button" className={activeTab === 'photos' ? styles.activeTab : ''} onClick={() => setActiveTab('photos')}>
             Photos
           </button>
-          <button
-            type="button"
-            className={activeTab === 'vidéos' ? styles.activeTab : ''}
-            onClick={() => setActiveTab('vidéos')}
-          >
+          <button type="button" className={activeTab === 'vidéos' ? styles.activeTab : ''} onClick={() => setActiveTab('vidéos')}>
             Vidéos
+          </button>
+          <button type="button" className={styles.moreTab} onClick={() => setMoreOpen((value) => !value)} aria-expanded={moreOpen}>
+            Plus <span>⌄</span>
           </button>
         </nav>
       </section>
@@ -228,7 +221,7 @@ export default function Profile() {
           <section className={styles.card}>
             <div className={styles.cardHeading}>
               <h2>Amis</h2>
-              <button type="button">Voir tout</button>
+              <Link to="/friends">Voir tout</Link>
             </div>
             <div className={styles.friendsGrid}>
               {friends.map((friend) => (
@@ -249,31 +242,16 @@ export default function Profile() {
 
         <section className={styles.feed}>
           <section className={styles.composer}>
-            <Avatar
-              src={profile?.avatar_url}
-              firstName={profile?.first_name}
-              lastName={profile?.last_name}
-              size="small"
-            />
-            <button type="button" className={styles.composerInput}>
-              Quoi de neuf, {profile?.first_name || 'vous'} ?
-            </button>
+            <Avatar src={profile?.avatar_url} firstName={profile?.first_name} lastName={profile?.last_name} size="small" />
+            <button type="button" className={styles.composerInput}>Quoi de neuf, {profile?.first_name || 'vous'} ?</button>
             <div className={styles.composerActions}>
-              <button type="button" aria-label="Ajouter une photo">
-                <span>▣</span> Photo
-              </button>
-              <button type="button" aria-label="Ajouter une vidéo">
-                <span>▶</span> Vidéo
-              </button>
+              <button type="button" aria-label="Ajouter une photo"><span>▣</span> Photo</button>
+              <button type="button" aria-label="Ajouter une vidéo"><span>▶</span> Vidéo</button>
             </div>
           </section>
 
           {visiblePublications.map((publication, index) => (
-            <Publication
-              key={publication.type + index}
-              publication={publication}
-              profile={profile}
-            />
+            <Publication key={publication.type + index} publication={publication} profile={profile} />
           ))}
 
           {!visiblePublications.length && (
@@ -297,22 +275,8 @@ export default function Profile() {
 
           <form onSubmit={save} noValidate>
             <div className={styles.row}>
-              <Input
-                label="Prénom"
-                name="first_name"
-                autoComplete="given-name"
-                value={form.first_name}
-                onChange={change}
-                error={errors.first_name}
-              />
-              <Input
-                label="Nom"
-                name="last_name"
-                autoComplete="family-name"
-                value={form.last_name}
-                onChange={change}
-                error={errors.last_name}
-              />
+              <Input label="Prénom" name="first_name" autoComplete="given-name" value={form.first_name} onChange={change} error={errors.first_name} />
+              <Input label="Nom" name="last_name" autoComplete="family-name" value={form.last_name} onChange={change} error={errors.last_name} />
             </div>
 
             <Select
@@ -330,14 +294,7 @@ export default function Profile() {
             />
 
             <label className={styles.textareaLabel} htmlFor="bio">Bio</label>
-            <textarea
-              id="bio"
-              name="bio"
-              maxLength={300}
-              value={form.bio}
-              onChange={change}
-              aria-describedby="bio-help"
-            />
+            <textarea id="bio" name="bio" maxLength={300} value={form.bio} onChange={change} aria-describedby="bio-help" />
             <div id="bio-help" className={styles.counter}>{form.bio.length}/300</div>
             {errors.bio && <p className={styles.fieldError}>{errors.bio}</p>}
 
